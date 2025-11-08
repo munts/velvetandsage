@@ -1,0 +1,43 @@
+flynt-component[name='MapGoogle'] {
+  .container {
+    margin-inline: auto;
+    max-inline-size: var(--content-max-width-full);
+  }
+
+  .map {
+    border-radius: var(--border-radius, 0);
+    inline-size: 100%;
+    overflow: hidden;
+    position: relative;
+
+    // Ensure map controls are visible
+    > div {
+      position: relative;
+    }
+  }
+
+  // Style the info window content
+  :global(.gm-style-iw) {
+    font-family: var(--font-family-base);
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-block-start: 0;
+    }
+
+    p:last-child {
+      margin-block-end: 0;
+    }
+  }
+
+  // Ensure the map marker is clickable
+  :global(.gm-style) {
+    img {
+      max-inline-size: none;
+    }
+  }
+}

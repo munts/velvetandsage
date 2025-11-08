@@ -1,0 +1,13 @@
+<flynt-component name="MapGoogle" load:on="visible" class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
+  <div class="container">
+    <div
+      class="map"
+      data-ref="mapContainer"
+      data-address="{{ address|e }}"
+      data-marker-content="{{ markerContent|e }}"
+      data-zoom="{{ mapSettings.zoom|default(15) }}"
+      style="height: {{ mapSettings.height|default(450) }}px;"
+    >
+    </div>
+  </div>
+</flynt-component>
