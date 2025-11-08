@@ -26,12 +26,11 @@ jobs:
         - name: Build assets
           run: npm run build
         - name: Deploy to Flywheel via SFTP
-          uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+          uses: wlixcc/SFTP-Deploy-Action@v1.2.4
           with:
             server: ${{ secrets.FLYWHEEL_SFTP_HOST }}
             username: ${{ secrets.FLYWHEEL_SFTP_USER }}
             password: ${{ secrets.FLYWHEEL_SFTP_PASSWORD }}
-            protocol: sftp
             port: 22
-            local-dir: ./
-            server-dir: /org-purple-squirrel/velvet-sage/wp-content/themes/velvetandsage/
+            local_path: ./
+            remote_path: /org-purple-squirrel/velvet-sage/wp-content/themes/velvetandsage/
