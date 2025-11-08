@@ -34,4 +34,4 @@ jobs:
             protocol: sftp
             port: 22
             local-dir: ./
-            server-dir: /
+            server-dir: /org-purple-squirrel/velvet-sage/wp-content/themes/velvetandsage/
