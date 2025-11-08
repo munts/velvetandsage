@@ -22,7 +22,7 @@ jobs:
         - name: Install Node dependencies
           run: npm ci
         - name: Install Composer dependencies
-          run: composer install --no-dev --optimize-autoloader
+          run: composer install --optimize-autoloader
         - name: Build assets
           run: npm run build
         - name: Deploy to Flywheel via SFTP
