@@ -56,7 +56,14 @@ function getACFLayout(): array
                 'type' => 'group',
                 'layout' => 'row',
                 'sub_fields' => [
-                    FieldVariables\getTheme()
+                    FieldVariables\getTheme(),
+                    [
+                        'label' => __('Anchor Name', 'flynt'),
+                        'instructions' => __('Optional. Add an anchor ID for smooth scrolling navigation (e.g., "about", "location"). Do not include the # symbol.', 'flynt'),
+                        'name' => 'anchorName',
+                        'type' => 'text',
+                        'required' => 0,
+                    ]
                 ]
             ]
         ]

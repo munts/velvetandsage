@@ -1,4 +1,4 @@
-<flynt-component name="BlockImageText" class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
+<flynt-component name="BlockImageText" class="componentSpacing" {{ options.anchorName ? 'id="' ~ options.anchorName ~ '"' }} {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
   <div class="container" {{ imagePosition ? 'data-image-position="' ~ imagePosition ~ '"' }}>
     {% if image %}
       <figure class="figure" data-size="medium" data-align="center">
