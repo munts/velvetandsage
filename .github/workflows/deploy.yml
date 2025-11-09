@@ -35,3 +35,20 @@ jobs:
             local_path: ./
             remote_path: /org-purple-squirrel/velvet-sage/wp-content/themes/velvetandsage/
             sftp_only: true
+            exclude: |
+              node_modules/
+              .git/
+              .github/
+              assets/scripts/
+              assets/styles/
+              .gitignore
+              .editorconfig
+              package.json
+              package-lock.json
+              composer.json
+              composer.lock
+              README.md
+              CHANGELOG.md
+              **/*.md
+              tests/
+              .vscode/
