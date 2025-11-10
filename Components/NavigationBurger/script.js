@@ -13,6 +13,9 @@ export default function (el) {
   const menuButtonClickDelegate = delegate('[data-ref="menuButton"]', onMenuButtonClick)
   el.addEventListener('click', menuButtonClickDelegate)
 
+  const anchorLinkDelegate = delegate('a[href^="#"]', onAnchorLinkClick)
+  el.addEventListener('click', anchorLinkDelegate)
+
   onBreakpointChange()
 
   function onMenuButtonClick (e) {
@@ -23,6 +26,16 @@ export default function (el) {
       el.setAttribute('data-status', 'menuIsOpen')
       disableBodyScroll(refs.menu)
     } else {
+      el.removeAttribute('data-status')
+      enableBodyScroll(refs.menu)
+    }
+  }
+
+  function onAnchorLinkClick (e) {
+    // Close the menu when an anchor link is clicked
+    if (isMenuOpen) {
+      isMenuOpen = false
+      refs.menuButton.setAttribute('aria-expanded', false)
       el.removeAttribute('data-status')
       enableBodyScroll(refs.menu)
     }
@@ -44,5 +57,6 @@ export default function (el) {
   return () => {
     isDesktopMediaQuery.removeEventListener('change', onBreakpointChange)
     el.removeEventListener('click', menuButtonClickDelegate)
+    el.removeEventListener('click', anchorLinkDelegate)
   }
 }
