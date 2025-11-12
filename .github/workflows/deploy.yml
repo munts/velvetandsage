@@ -25,10 +25,12 @@ jobs:
           run: composer install --optimize-autoloader
         - name: Build assets
           run: npm run build
+        - name: Install production Composer dependencies
+          run: composer install --no-dev --optimize-autoloader
         - name: Prepare deployment directory
           run: |
             mkdir -p deploy
-            rsync -av --exclude='node_modules' --exclude='.git' --exclude='.github' --exclude='assets/scripts' --exclude='assets/styles' --exclude='package.json' --exclude='package-lock.json' --exclude='composer.json' --exclude='composer.lock' --exclude='*.md' --exclude='.gitignore' --exclude='.editorconfig' --exclude='tests' --exclude='.vscode' --exclude='deploy' ./ deploy/
+            rsync -av --exclude='node_modules' --exclude='.git' --exclude='.github' --exclude='assets/scripts' --exclude='assets/styles' --exclude='package.json' --exclude='package-lock.json' --exclude='composer.json' --exclude='composer.lock' --exclude='*.md' --exclude='.gitignore' --exclude='.editorconfig' --exclude='tests' --exclude='Tests' --exclude='test' --exclude='docs' --exclude='Docs' --exclude='.vscode' --exclude='deploy' ./ deploy/
         - name: Deploy to Flywheel via SFTP
           uses: wlixcc/SFTP-Deploy-Action@v1.2.4
           with:
