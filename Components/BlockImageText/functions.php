@@ -40,7 +40,7 @@ function getACFLayout(): array
                 'name' => 'contentHtml',
                 'type' => 'wysiwyg',
                 'delay' => 0,
-                'media_upload' => 0,
+                'media_upload' => 1,
                 'required' => 1,
             ],
             [

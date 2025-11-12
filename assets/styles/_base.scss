@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Hurricane&display=swap');
+
 /**
  * Typography
  */
@@ -120,6 +122,42 @@ img {
 
   .wp-block-image & {
     inline-size: initial;
+  }
+
+  // Respect WordPress image size classes
+  &.size-thumbnail,
+  &.size-medium,
+  &.size-large {
+    block-size: auto;
+    inline-size: auto;
+    max-inline-size: 100%;
+  }
+
+  // Respect WordPress alignment classes
+  &.alignleft,
+  &.alignright,
+  &.aligncenter,
+  &.alignnone {
+    block-size: auto;
+    inline-size: auto;
+    max-inline-size: 100%;
+  }
+
+  &.aligncenter {
+    display: block;
+    margin-inline: auto;
+  }
+
+  &.alignleft {
+    float: left;
+    margin-block: 0.5rem;
+    margin-inline-end: 1rem;
+  }
+
+  &.alignright {
+    float: right;
+    margin-block: 0.5rem;
+    margin-inline-start: 1rem;
   }
 }
 
@@ -559,4 +597,15 @@ flynt-component {
 [data-theme] {
   background-color: var(--color-background);
   color: var(--color-text);
+}
+
+/**
+ * Custom Font Classes
+ */
+
+.hurricane {
+  color: #8a1538;
+  font-family: 'Hurricane', cursive;
+  font-size: 4rem;
+  font-weight: 400;
 }
