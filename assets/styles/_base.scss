@@ -149,13 +149,13 @@ img {
   }
 
   &.alignleft {
-    float: left;
+    float: inline-start;
     margin-block: 0.5rem;
     margin-inline-end: 1rem;
   }
 
   &.alignright {
-    float: right;
+    float: inline-end;
     margin-block: 0.5rem;
     margin-inline-start: 1rem;
   }
