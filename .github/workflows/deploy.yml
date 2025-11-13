@@ -38,6 +38,6 @@ jobs:
             username: ${{ secrets.FLYWHEEL_SFTP_USER }}
             password: ${{ secrets.FLYWHEEL_SFTP_PASSWORD }}
             port: 22
-            local_path: ./deploy/
+            local_path: ./deploy/*
             remote_path: /org-purple-squirrel/velvet-sage/wp-content/themes/velvetandsage/
             sftp_only: true
