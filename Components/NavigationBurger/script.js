@@ -16,8 +16,9 @@ export default function (el) {
   const anchorLinkDelegate = delegate('a[href^="#"]', onAnchorLinkClick)
   el.addEventListener('click', anchorLinkDelegate)
 
-  const menuLinkDelegate = delegate('.menu .link', onMenuLinkClick)
-  el.addEventListener('click', menuLinkDelegate)
+  if (refs.menu) {
+    refs.menu.addEventListener('click', onMenuClick)
+  }
 
   onBreakpointChange()
 
@@ -44,16 +45,15 @@ export default function (el) {
     }
   }
 
-  function onMenuLinkClick (e) {
-    const href = e.target.getAttribute('href')
-    // Close menu if it's an anchor link (either #section or full URL with #)
-    if (href && (href.includes('#') || href.startsWith('#'))) {
-      if (isMenuOpen) {
-        isMenuOpen = false
-        refs.menuButton.setAttribute('aria-expanded', false)
-        el.removeAttribute('data-status')
-        enableBodyScroll(refs.menu)
-      }
+  function onMenuClick (e) {
+    // Find the clicked link (could be the target or a parent)
+    const link = e.target.closest('.link')
+    if (link && isMenuOpen) {
+      // Close the menu when any menu link is clicked
+      isMenuOpen = false
+      refs.menuButton.setAttribute('aria-expanded', false)
+      el.removeAttribute('data-status')
+      enableBodyScroll(refs.menu)
     }
   }
 
@@ -74,6 +74,8 @@ export default function (el) {
     isDesktopMediaQuery.removeEventListener('change', onBreakpointChange)
     el.removeEventListener('click', menuButtonClickDelegate)
     el.removeEventListener('click', anchorLinkDelegate)
-    el.removeEventListener('click', menuLinkDelegate)
+    if (refs.menu) {
+      refs.menu.removeEventListener('click', onMenuClick)
+    }
   }
 }
