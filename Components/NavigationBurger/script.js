@@ -16,6 +16,9 @@ export default function (el) {
   const anchorLinkDelegate = delegate('a[href^="#"]', onAnchorLinkClick)
   el.addEventListener('click', anchorLinkDelegate)
 
+  const menuLinkDelegate = delegate('.menu .link', onMenuLinkClick)
+  el.addEventListener('click', menuLinkDelegate)
+
   onBreakpointChange()
 
   function onMenuButtonClick (e) {
@@ -41,6 +44,19 @@ export default function (el) {
     }
   }
 
+  function onMenuLinkClick (e) {
+    const href = e.target.getAttribute('href')
+    // Close menu if it's an anchor link (either #section or full URL with #)
+    if (href && (href.includes('#') || href.startsWith('#'))) {
+      if (isMenuOpen) {
+        isMenuOpen = false
+        refs.menuButton.setAttribute('aria-expanded', false)
+        el.removeAttribute('data-status')
+        enableBodyScroll(refs.menu)
+      }
+    }
+  }
+
   function onBreakpointChange () {
     if (!isDesktopMediaQuery.matches) {
       setScrollPaddingTop()
@@ -58,5 +74,6 @@ export default function (el) {
     isDesktopMediaQuery.removeEventListener('change', onBreakpointChange)
     el.removeEventListener('click', menuButtonClickDelegate)
     el.removeEventListener('click', anchorLinkDelegate)
+    el.removeEventListener('click', menuLinkDelegate)
   }
 }
