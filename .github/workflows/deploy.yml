@@ -21,6 +21,12 @@ jobs:
             tools: composer
         - name: Install Node dependencies
           run: npm ci
+        - name: Cache vendor directory
+          id: vendor-cache
+          uses: actions/cache@v4
+          with:
+            path: vendor
+            key: vendor-${{ hashFiles('composer.lock') }}
         - name: Install Composer dependencies
           run: composer install --optimize-autoloader
         - name: Build assets
@@ -30,7 +36,11 @@ jobs:
         - name: Prepare deployment directory
           run: |
             mkdir -p deploy
-            rsync -av --exclude='node_modules' --exclude='.git' --exclude='.github' --exclude='assets/scripts' --exclude='assets/styles' --exclude='package.json' --exclude='package-lock.json' --exclude='composer.json' --exclude='composer.lock' --exclude='*.md' --exclude='.gitignore' --exclude='.editorconfig' --exclude='tests' --exclude='Tests' --exclude='test' --exclude='docs' --exclude='Docs' --exclude='.vscode' --exclude='deploy' ./ deploy/
+            VENDOR_EXCLUDE=""
+            if [ "${{ steps.vendor-cache.outputs.cache-hit }}" == "true" ]; then
+              VENDOR_EXCLUDE="--exclude='vendor'"
+            fi
+            rsync -av --exclude='node_modules' --exclude='.git' --exclude='.github' --exclude='assets/scripts' --exclude='assets/styles' --exclude='package.json' --exclude='package-lock.json' --exclude='composer.json' --exclude='composer.lock' --exclude='*.md' --exclude='.gitignore' --exclude='.editorconfig' --exclude='tests' --exclude='Tests' --exclude='test' --exclude='docs' --exclude='Docs' --exclude='.vscode' --exclude='deploy' $VENDOR_EXCLUDE ./ deploy/
         - name: Deploy to Flywheel via SFTP
           uses: wlixcc/SFTP-Deploy-Action@v1.2.4
           with:

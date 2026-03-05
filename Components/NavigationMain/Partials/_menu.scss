@@ -1,6 +1,7 @@
 .menu {
   align-items: center;
   display: flex;
+  gap: 0.25rem;
   list-style: none;
   margin-inline-end: -1rem;
   padding-inline-start: 2rem;
@@ -22,12 +23,15 @@
   .current-menu-item {
     .link {
       color: var(--color-accent);
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 
   .link.button--shop {
     color: #fff;
+    margin-inline-start: 0.75rem;
+    padding-block: 0.5rem;
+    padding-inline: 1.25rem;
 
     &:hover {
       color: #fff;
